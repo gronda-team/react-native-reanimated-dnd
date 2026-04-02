@@ -98,3 +98,4 @@ example-app/coverage/
 .vercel
 launch-video/
 *.mp4
+!lib/
