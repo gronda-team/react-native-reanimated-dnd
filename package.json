@@ -70,5 +70,8 @@
     "lib/**/*.d.ts",
     "README.md",
     "LICENSE"
-  ]
+  ],
+  "dependencies": {
+    "react-native-reanimated-dnd": "^2.0.0"
+  }
 }

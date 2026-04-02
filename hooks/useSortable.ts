@@ -337,7 +337,7 @@ export function useSortable<T>(
         currentY,
         lowerBound.value,
         upperBound.value,
-        effectiveItemHeight,
+        effectiveItemHeight * 0.4, // Trigger auto-scroll closer to edges (40% of item height)
         autoScrollDirection
       );
     },
