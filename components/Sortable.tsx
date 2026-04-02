@@ -18,8 +18,6 @@ import {
 } from "../hooks/useSortableList";
 import { useHorizontalSortableList } from "../hooks/useHorizontalSortableList";
 import { UseHorizontalSortableListOptions } from "../types/sortable";
-import { dataHash } from "./sortableUtils";
-
 // Create animated versions of both components
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView);
@@ -305,13 +303,11 @@ function HorizontalSortableContent<TData extends { id: string }>({
 
 export const Sortable = memo(
   ({ data, renderItem, ...props }: SortableProps<any>) => {
-    const dataHashKey = dataHash(data);
     return (
       <SortableComponent
         data={data}
         renderItem={renderItem}
         {...props}
-        key={dataHashKey}
       />
     );
   }

@@ -122,6 +122,15 @@ export function useSortableList<TData extends { id: string }>(
   const scrollViewRef = useAnimatedRef();
   const dropProviderRef = useRef<DropProviderRef | null>(null);
 
+  // Sync positions when data changes (add/remove items)
+  useEffect(() => {
+    const currentIds = Object.keys(positions.value).sort().join(',');
+    const newIds = data.map((item, index) => itemKeyExtractor(item, index)).sort().join(',');
+    if (currentIds !== newIds) {
+      positions.value = listToObject(data);
+    }
+  }, [data, itemKeyExtractor, positions]);
+
   // Dynamic height shared values — initialized with estimated heights
   // so items are positioned correctly from the first frame.
   const initialHeights = useMemo(() => {

@@ -200,11 +200,12 @@ export function useSortable<T>(
 
   const initialTopVal = useMemo(() => {
     const posArr = positions.get();
-    const pos = posArr?.[id] ?? 0;
+    // Use itemsCount - 1 as fallback for new items (place at bottom, not top)
+    const pos = posArr?.[id] ?? itemsCount - 1;
     // For dynamic heights, use estimated height for initial position.
     // The animated reaction will correct it once cumulative heights are available.
     return pos * effectiveItemHeight;
-  }, []);
+  }, [itemsCount]);
 
   const initialLowerBoundVal = useMemo(() => {
     return lowerBound.get();
@@ -235,7 +236,8 @@ export function useSortable<T>(
       return (positions.value[id] ?? 0) * effectiveItemHeight;
     },
     (newTop, oldTop) => {
-      if (oldTop !== null && newTop !== oldTop && !movingSV.value) {
+      // Animate on first render (oldTop === null) or when position changes
+      if (oldTop === null || (newTop !== oldTop && !movingSV.value)) {
         top.value = withSpring(newTop);
       }
     },
@@ -370,7 +372,7 @@ export function useSortable<T>(
         switch (scrollDirection) {
           case ScrollDirection.Up: {
             targetLowerBound.value = lowerBound.value;
-            targetLowerBound.value = withTiming(0, { duration: 1500 });
+            targetLowerBound.value = withTiming(0, { duration: 3000 });
             break;
           }
           case ScrollDirection.Down: {
@@ -388,7 +390,7 @@ export function useSortable<T>(
             }
             const maxScroll = contentHeight - calculatedContainerHeight;
             targetLowerBound.value = lowerBound.value;
-            targetLowerBound.value = withTiming(maxScroll, { duration: 1500 });
+            targetLowerBound.value = withTiming(maxScroll, { duration: 3000 });
             break;
           }
           case ScrollDirection.None: {
