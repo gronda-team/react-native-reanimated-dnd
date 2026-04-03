@@ -420,8 +420,11 @@ export function useSortable<T>(
   );
 
   // === Pan gesture ===
+  // activeOffsetY: gesture fails if finger moves more than 15px before long press activates
+  // This allows normal scrolling to work properly on Android
   const createPanGesture = () =>
     Gesture.Pan()
+      .activeOffsetY([-15, 15])
       .activateAfterLongPress(200)
       .shouldCancelWhenOutside(false)
       .onStart((event) => {
