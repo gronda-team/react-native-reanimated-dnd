@@ -8,6 +8,7 @@ export interface UseSortableListOptions<TData> {
         [id: string]: number;
     }) => void;
     itemKeyExtractor?: (item: TData, index: number) => string;
+    footerHeight?: number;
 }
 export interface UseSortableListReturn<TData> {
     positions: any;

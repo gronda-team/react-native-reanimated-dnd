@@ -20,6 +20,7 @@ export interface UseSortableListOptions<TData> {
   estimatedItemHeight?: number;
   onHeightsMeasured?: (heights: { [id: string]: number }) => void;
   itemKeyExtractor?: (item: TData, index: number) => string;
+  footerHeight?: number;
 }
 
 export interface UseSortableListReturn<TData> {
@@ -79,6 +80,7 @@ export function useSortableList<TData extends { id: string }>(
     estimatedItemHeight = 60,
     onHeightsMeasured,
     itemKeyExtractor = (item) => item.id,
+    footerHeight = 0,
   } = options;
 
   // Determine if we're in dynamic height mode:
@@ -249,11 +251,12 @@ export function useSortableList<TData extends { id: string }>(
     }, 50);
   }, []);
 
-  // Calculate content height
-  const contentHeight =
+  // Calculate content height (including footer padding)
+  const baseContentHeight =
     !isDynamicHeight && fixedContentHeight !== null
       ? fixedContentHeight
       : dynamicContentHeight;
+  const contentHeight = baseContentHeight + footerHeight;
 
   // Helper to get props for each sortable item
   const getItemProps = useCallback(

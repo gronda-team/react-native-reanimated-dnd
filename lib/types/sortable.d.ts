@@ -59,6 +59,7 @@ export interface UseSortableListOptions<TData extends SortableData> {
         [id: string]: number;
     }) => void;
     itemKeyExtractor?: (item: TData, index: number) => string;
+    footerHeight?: number;
 }
 export interface UseSortableListReturn<TData extends SortableData> {
     positions: any;
@@ -141,6 +142,7 @@ export interface SortableProps<TData extends SortableData> {
     contentContainerStyle?: StyleProp<ViewStyle>;
     itemKeyExtractor?: (item: TData, index: number) => string;
     useFlatList?: boolean;
+    footerHeight?: number;
 }
 export interface SortableRenderItemProps<TData extends SortableData> {
     item: TData;

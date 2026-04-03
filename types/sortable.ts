@@ -346,6 +346,13 @@ export interface UseSortableListOptions<TData extends SortableData> {
    * ```
    */
   itemKeyExtractor?: (item: TData, index: number) => string;
+
+  /**
+   * Extra height to add at the bottom of the scrollable content (in pixels).
+   * Useful for making space for fixed-position elements like footers that overlay the list.
+   * @default 0
+   */
+  footerHeight?: number;
 }
 
 /**
@@ -630,6 +637,19 @@ export interface SortableProps<TData extends SortableData> {
    * @default true
    */
   useFlatList?: boolean;
+
+  /**
+   * Extra height to add at the bottom of the scrollable content (in pixels).
+   * Useful for making space for fixed-position elements like footers that overlay the list.
+   * This height is added to the calculated content height.
+   *
+   * @example
+   * ```typescript
+   * // Make room for a 60px footer at the bottom
+   * footerHeight={60}
+   * ```
+   */
+  footerHeight?: number;
 }
 
 /**

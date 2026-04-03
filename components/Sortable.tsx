@@ -50,6 +50,7 @@ function SortableComponent<TData extends { id: string }>({
   contentContainerStyle,
   itemKeyExtractor = (item) => item.id,
   useFlatList = true,
+  footerHeight = 0,
 }: SortableProps<TData>) {
   // Determine if dynamic height mode applies
   const isDynamicHeightMode = useMemo(() => {
@@ -104,6 +105,7 @@ function SortableComponent<TData extends { id: string }>({
       contentContainerStyle={contentContainerStyle}
       itemKeyExtractor={itemKeyExtractor}
       useFlatList={useFlatList}
+      footerHeight={footerHeight}
     />
   );
 }
@@ -120,6 +122,7 @@ function VerticalSortableContent<TData extends { id: string }>({
   contentContainerStyle,
   itemKeyExtractor,
   useFlatList,
+  footerHeight,
 }: SortableProps<TData>) {
   const {
     scrollViewRef,
@@ -135,6 +138,7 @@ function VerticalSortableContent<TData extends { id: string }>({
     estimatedItemHeight,
     onHeightsMeasured,
     itemKeyExtractor,
+    footerHeight,
   });
 
   const memoizedVerticalRenderItem = useCallback(
