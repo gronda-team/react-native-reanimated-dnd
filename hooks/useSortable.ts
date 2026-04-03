@@ -478,6 +478,10 @@ export function useSortable<T>(
         movingSV.value = false;
         scheduleOnRN(setIsMoving, false);
 
+        // Reset auto-scroll direction to prevent scroll sync from
+        // interfering with normal momentum scrolling after gesture ends
+        autoScrollDirection.value = ScrollDirection.None;
+
         if (onDrop) {
           const positionsCopy = { ...positions.value };
           scheduleOnRN(onDrop, id, positions.value[id], positionsCopy);
