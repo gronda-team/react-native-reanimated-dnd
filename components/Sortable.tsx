@@ -164,7 +164,7 @@ function VerticalSortableContent<TData extends { id: string }>({
             scrollEventThrottle={16}
             style={[styles.scrollView, style]}
             contentContainerStyle={[
-              { height: contentHeight },
+              { minHeight: contentHeight },
               contentContainerStyle,
             ]}
             onScrollEndDrag={handleScrollEnd}
@@ -179,7 +179,7 @@ function VerticalSortableContent<TData extends { id: string }>({
             scrollEventThrottle={16}
             style={[styles.scrollView, style]}
             contentContainerStyle={[
-              { height: contentHeight },
+              { minHeight: contentHeight },
               contentContainerStyle,
             ]}
             onScrollEndDrag={handleScrollEnd}
