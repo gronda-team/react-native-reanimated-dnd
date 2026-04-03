@@ -217,11 +217,20 @@ export function useSortableList<TData extends { id: string }>(
     [data, itemKeyExtractor, estimatedItemHeight, onHeightsMeasured]
   );
 
-  // Scrolling synchronization
+  // Scrolling synchronization - only sync when auto-scrolling to avoid
+  // interfering with Android's native momentum scrolling during normal scrolls
   useAnimatedReaction(
-    () => scrollY.value,
+    () => {
+      // Only return scrollY when auto-scrolling is active
+      if (autoScroll.value !== ScrollDirection.None) {
+        return scrollY.value;
+      }
+      return null;
+    },
     (scrolling) => {
-      scrollTo(scrollViewRef, 0, scrolling, false);
+      if (scrolling !== null) {
+        scrollTo(scrollViewRef, 0, scrolling, false);
+      }
     }
   );
 

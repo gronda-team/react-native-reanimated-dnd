@@ -337,7 +337,7 @@ export function useSortable<T>(
         currentY,
         lowerBound.value,
         upperBound.value,
-        effectiveItemHeight * 0.4, // Trigger auto-scroll closer to edges (40% of item height)
+        effectiveItemHeight * 0.25, // Trigger auto-scroll when within 25% of item height from edge
         autoScrollDirection
       );
     },
@@ -372,7 +372,7 @@ export function useSortable<T>(
         switch (scrollDirection) {
           case ScrollDirection.Up: {
             targetLowerBound.value = lowerBound.value;
-            targetLowerBound.value = withTiming(0, { duration: 3000 });
+            targetLowerBound.value = withTiming(0, { duration: 4000 });
             break;
           }
           case ScrollDirection.Down: {
@@ -390,7 +390,7 @@ export function useSortable<T>(
             }
             const maxScroll = contentHeight - calculatedContainerHeight;
             targetLowerBound.value = lowerBound.value;
-            targetLowerBound.value = withTiming(maxScroll, { duration: 3000 });
+            targetLowerBound.value = withTiming(maxScroll, { duration: 4000 });
             break;
           }
           case ScrollDirection.None: {
